@@ -34,21 +34,23 @@ Thank you for your interest in contributing to AEGIS! 🎉
 ## Development Setup
 
 ```bash
-# Clone your fork
-git clone https://github.com/yourusername/aegis-ai-defence.git
+# 1. Fork the repository on GitHub
+
+# 2. Clone your fork
+git clone https://github.com/YOUR_USERNAME/aegis-ai-defence.git
 cd aegis-ai-defence
 
-# Install dependencies
+# 3. Install dependencies
 npm install
 
-# Set up environment
+# 4. Set up environment
 cp .env.example .env
 # Add your GEMINI_API_KEY to .env
 
-# Run development server
+# 5. Run development server
 npm run dev
 
-# Run tests
+# 6. Run tests
 npm test
 ```
 

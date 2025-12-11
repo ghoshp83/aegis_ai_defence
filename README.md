@@ -52,17 +52,19 @@
 ### Option 1: Docker (Recommended)
 
 ```bash
-# Clone repository
-git clone https://github.com/yourusername/aegis-ai-defence.git
+# 1. Fork the repository on GitHub (click Fork button)
+
+# 2. Clone your fork
+git clone https://github.com/YOUR_USERNAME/aegis-ai-defence.git
 cd aegis-ai-defence
 
-# Set your Gemini API key
+# 3. Set your Gemini API key
 echo "GEMINI_API_KEY=your_api_key_here" > .env
 
-# Run with Docker
+# 4. Run with Docker
 docker-compose up -d
 
-# Access AEGIS
+# 5. Access AEGIS
 open http://localhost:3000
 ```
 
@@ -279,9 +281,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-- **Author:** Your Name
-- **Email:** your.email@example.com
-- **Twitter:** [@yourhandle](https://twitter.com/yourhandle)
+- **Author:** Pralay Ghosh
+- **Email:** pralay.ghosh@gmail.com
 
 ---
 

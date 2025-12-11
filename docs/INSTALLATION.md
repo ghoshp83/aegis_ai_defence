@@ -14,17 +14,19 @@
 ### Quick Start
 
 ```bash
-# Clone repository
-git clone https://github.com/yourusername/aegis-ai-defence.git
+# 1. Fork the repository on GitHub (click Fork button)
+
+# 2. Clone your fork
+git clone https://github.com/YOUR_USERNAME/aegis-ai-defence.git
 cd aegis-ai-defence
 
-# Create .env file
+# 3. Create .env file
 echo "GEMINI_API_KEY=your_api_key_here" > .env
 
-# Start AEGIS
+# 4. Start AEGIS
 docker-compose up -d
 
-# Access at http://localhost:3000
+# 5. Access at http://localhost:3000
 ```
 
 ### Stop AEGIS
