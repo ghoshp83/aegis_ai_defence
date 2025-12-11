@@ -86,69 +86,6 @@ aegis-audit:
 
 ---
 
-## Jenkins
-
-### Jenkinsfile
-
-```groovy
-pipeline {
-    agent any
-    
-    environment {
-        GEMINI_API_KEY = credentials('gemini-api-key')
-    }
-    
-    stages {
-        stage('AEGIS Audit') {
-            steps {
-                sh '''
-                    pip install google-generativeai
-                    python cli/python/aegis_audit.py \
-                        --file models/net.py \
-                        --api-key $GEMINI_API_KEY \
-                        --threshold 80
-                '''
-            }
-        }
-    }
-}
-```
-
----
-
-## CircleCI
-
-### config.yml
-
-```yaml
-version: 2.1
-
-jobs:
-  aegis-audit:
-    docker:
-      - image: python:3.10
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: pip install google-generativeai
-      - run:
-          name: Run AEGIS Audit
-          command: |
-            python cli/python/aegis_audit.py \
-              --file models/net.py \
-              --api-key $GEMINI_API_KEY \
-              --threshold 80
-
-workflows:
-  version: 2
-  audit:
-    jobs:
-      - aegis-audit
-```
-
----
-
 ## Docker-based CI
 
 ### Using Docker
@@ -255,4 +192,3 @@ python aegis_audit.py --file model.py --threshold 85
 ## Next Steps
 
 - [User Guide](USER_GUIDE.md)
-- [API Reference](API.md)
