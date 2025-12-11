@@ -28,7 +28,6 @@ open http://localhost:3000
 ## Links
 
 - **Video:** https://youtu.be/QBqkJdfmxhk
-- **Live Demo:** https://ai.studio/apps/drive/1ykBiMJcolY2M_kICJ49fxxksenPd5r_F
 - **Docs:** [docs/](docs/)
 
 ## Need Help?
