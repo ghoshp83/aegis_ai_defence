@@ -9,7 +9,7 @@
 
 **AEGIS** (Advanced Electronic Guard & Intelligence System) is powered by Google Gemini 3 Pro to perform deep static and dynamic analysis of neural networks across multiple frameworks (PyTorch, TensorFlow, Keras, Go).
 
-🎥 **[Watch Demo Video](https://youtu.be/QBqkJdfmxhk)** | 🚀 **[Try Live Demo](https://ai.studio/apps/drive/1ykBiMJcolY2M_kICJ49fxxksenPd5r_F?fullscreenApplet=true)**
+🎥 **[Watch Demo Video](https://youtu.be/QBqkJdfmxhk)**
 
 ---
 
@@ -269,19 +269,9 @@ git push origin feature/amazing-feature
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
-
-## 🏆 Awards & Recognition
-
-- 🥇 **Google DeepMind Gemini 3 Pro Vibe Coding Hackathon** (December 2024)
-- ⭐ **Featured Project:** Google AI Studio
-
----
-
 ## 🔗 Links
 
 - **Demo Video:** https://youtu.be/QBqkJdfmxhk
-- **Live Demo:** https://ai.studio/apps/drive/1ykBiMJcolY2M_kICJ49fxxksenPd5r_F
 - **Documentation:** [docs/](docs/)
 - **Issues:** [GitHub Issues](https://github.com/yourusername/aegis-ai-defence/issues)
 
