@@ -19,7 +19,7 @@ def analyze_code(file_path, api_key):
     ]
     
     model = genai.GenerativeModel(
-        'gemini-3-pro-preview',
+        'gemini-2.5-pro',
         safety_settings=safety_settings
     )
     

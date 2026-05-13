@@ -1,18 +1,10 @@
-
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { describe, test, expect, vi } from 'vitest';
 import App from '../App';
 
-// Add declarations to fix TypeScript errors when @types/jest is missing
-declare const jest: any;
-declare const describe: any;
-declare const test: any;
-declare const expect: any;
-
-// Mock the Gemini Service
-jest.mock('../services/geminiService', () => ({
-  analyzeModelCode: jest.fn().mockImplementation((code, onProgress) => {
+vi.mock('../services/geminiService', () => ({
+  analyzeModelCode: vi.fn().mockImplementation((code: string, onProgress: (p: number) => void) => {
     onProgress(100);
     return Promise.resolve({
       valid: true,
@@ -34,13 +26,13 @@ jest.mock('../services/geminiService', () => ({
       exploitPoC: { title: "Exploit", code: "print('hack')", description: "Desc" }
     });
   }),
-  streamChatResponse: jest.fn()
+  streamChatResponse: vi.fn()
 }));
 
 describe('AEGIS App', () => {
   test('renders header correctly', () => {
     render(<App />);
-    expect(screen.getByText(/AEGIS/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/AEGIS/i).length).toBeGreaterThan(0);
     expect(screen.getByText(/AI DEFENSE PROTOCOL/i)).toBeInTheDocument();
   });
 
@@ -52,7 +44,7 @@ describe('AEGIS App', () => {
 
   test('analyze button is disabled when input is empty', () => {
     render(<App />);
-    const button = screen.getByText(/Run Sentinel Analysis/i); // Button text remains "Run Sentinel Analysis" as the engine is still Sentinel based, or we can update it. Let's assume we kept the button text similar for familiarity, or updated it. Wait, in CodePanel it says "Run Sentinel Analysis".
+    const button = screen.getByText(/Run AEGIS Analysis/i);
     expect(button).toBeDisabled();
   });
 
@@ -60,7 +52,7 @@ describe('AEGIS App', () => {
     render(<App />);
     const textarea = screen.getByPlaceholderText(/Paste your PyTorch\/TensorFlow\/Keras model code here/i);
     fireEvent.change(textarea, { target: { value: 'import torch' } });
-    const button = screen.getByText(/Run Sentinel Analysis/i);
+    const button = screen.getByText(/Run AEGIS Analysis/i);
     expect(button).not.toBeDisabled();
   });
 
@@ -68,8 +60,8 @@ describe('AEGIS App', () => {
     render(<App />);
     const textarea = screen.getByPlaceholderText(/Paste your PyTorch\/TensorFlow\/Keras model code here/i);
     fireEvent.change(textarea, { target: { value: 'import torch' } });
-    
-    const button = screen.getByText(/Run Sentinel Analysis/i);
+
+    const button = screen.getByText(/Run AEGIS Analysis/i);
     fireEvent.click(button);
   });
 
@@ -77,7 +69,7 @@ describe('AEGIS App', () => {
       render(<App />);
       const input = screen.getByPlaceholderText(/Type your question/i);
       expect(input).toBeInTheDocument();
-      
+
       fireEvent.change(input, { target: { value: 'Is this secure?' } });
       expect(input).toHaveValue('Is this secure?');
   });

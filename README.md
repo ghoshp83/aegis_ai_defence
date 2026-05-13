@@ -21,11 +21,13 @@
 - **Code Diff Viewer:** Side-by-side comparison showing exact fixes
 - **Only tool that generates both the attack AND the fix**
 
-### ⚔️ Live Attack Simulator
-- Real-time FGSM attack visualization
-- Watch model confidence degrade (98% → 2%)
-- Animated attack success rate (87%)
-- Visual proof of vulnerabilities
+### ⚔️ Live Attack Simulator *(illustrative)*
+- FGSM-style attack **visualization** (UI prototype — see disclaimer below)
+- Animated model-confidence degradation (98% → 2%)
+- Animated attack success rate (fixed 87%)
+- Designed to communicate the threat model to non-ML stakeholders
+
+> **Honest disclaimer:** the Live Attack Simulator is a **UI prototype**. The "FGSM" animation is a `setInterval` loop adding `Math.random() * 5` noise and ending at a hardcoded 87 % success rate — it is **not** a live gradient-descent attack against a real model. The Gemini-driven Active Defense + Code Diff Viewer above are real; this widget exists to communicate the threat-model visually. Roadmap: wire to a real adversarial library (e.g. CleverHans / Foolbox) running against an uploaded model.
 
 ### 🧠 RL Auto-Optimizer
 - AI improving AI through reinforcement learning

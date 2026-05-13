@@ -23,7 +23,7 @@ SYSTEM_INSTRUCTION = """${INITIAL_INSTRUCTION.replace(/\\/g, '\\\\').replace(/"/
 
 def analyze_code(file_path, api_key):
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-3-pro-preview', system_instruction=SYSTEM_INSTRUCTION)
+    model = genai.GenerativeModel('gemini-2.5-pro', system_instruction=SYSTEM_INSTRUCTION)
     with open(file_path, 'r') as f: code = f.read()
     
     response = model.generate_content(
@@ -86,7 +86,7 @@ async function main() {
 
   try {
     const result = await ai.models.generateContent({
-      model: "gemini-3-pro-preview",
+      model: "gemini-2.5-pro",
       contents: { parts: [{ text: \`Analyze code:\\n\\n\${code}\` }] },
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
@@ -159,7 +159,7 @@ func main() {
 	}
 	defer client.Close()
 
-	model := client.GenerativeModel("gemini-3-pro-preview")
+	model := client.GenerativeModel("gemini-2.5-pro")
     // Note: In a real Go impl, SystemInstruction would be set here.
     // For brevity, we append it to the prompt.
 	model.SetTemperature(0.2)

@@ -260,7 +260,7 @@ export const analyzeModelCode = async (
     `;
 
     const responseStream = await ai.models.generateContentStream({
-      model: "gemini-3-pro-preview",
+      model: "gemini-2.5-pro",
       contents: [
         {
           role: "user",
@@ -370,7 +370,7 @@ export const optimizeModelWithRL = async (
     const runStream = async (): Promise<RLOptimizationResult> => {
         try {
             const responseStream = await ai.models.generateContentStream({
-                model: "gemini-3-pro-preview",
+                model: "gemini-2.5-pro",
                 contents: [{
                     role: "user",
                     parts: [{ text: `Optimize this code using RL Simulation. Focus: ${rewardFocus}\n\n${code}` }]
@@ -547,7 +547,7 @@ export const streamChatResponse = async (
   try {
     const ai = getAiClient();
     const chat = ai.chats.create({
-      model: "gemini-3-pro-preview",
+      model: "gemini-2.5-pro",
       config: {
         systemInstruction: `You are AEGIS (Advanced Electronic Guard & Intelligence System).
         
