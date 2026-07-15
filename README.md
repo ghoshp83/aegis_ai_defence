@@ -50,6 +50,44 @@
 
 ---
 
+## 🏗️ Architecture
+
+```mermaid
+flowchart TB
+    U["👤 User pastes neural-network code<br/>(PyTorch / TensorFlow / Keras / Go)"] --> UI["React 19 + TypeScript UI (Vite)"]
+
+    UI --> GS["geminiService.ts"]
+    GS -->|"structured JSON schema,<br/>streaming + robust repair"| G["Gemini 2.5 Pro"]
+    GS -->|"executive video briefing"| V["Veo 3.1"]
+
+    G --> RES["Typed AnalysisResult"]
+    RES --> DASH["📊 Dashboard<br/>scores · vulnerabilities · performance"]
+    RES --> DEF["⚔️ Active Defense<br/>exploit PoC + remediated code diff"]
+    RES --> CERT["📜 EU AI Act certificate"]
+    RES --> CHAT["💬 Context-aware Q&A chat"]
+    RES --> RL["🧠 RL-style optimizer<br/>(streamed improvement episodes)"]
+
+    UI -.-> SIM["Attack Simulator<br/>(illustrative UI prototype)"]
+
+    CLI["cli/python/aegis_audit.py"] -->|"security score vs --threshold<br/>gates CI/CD pipelines"| G
+```
+
+### Why this stack
+
+- **React 19 + Vite, no backend** — the whole platform is a static SPA; your model code goes directly from the browser to the Gemini API and nowhere else. Nothing to host, nothing that stores your code.
+- **Gemini structured output** — analysis responses are constrained by a JSON `Schema`, so the typed dashboard (`types.ts`) is driven by contract, not prose-scraping. A stack-based JSON repairer recovers truncated streaming responses instead of failing the whole audit.
+- **Recharts** for the score gauges and telemetry, **Tailwind** for the dark console aesthetic.
+- **Vitest + React Testing Library** for CI-run tests; **Docker** for a one-command deployment.
+- **Python CLI** for pipelines — the same audit as an exit-code gate (`--threshold`), so a low-scoring model fails the build.
+
+### Operational characteristics
+
+- Analysis streams progressively; a typical audit renders in seconds rather than blocking on the full response.
+- The RL-style optimizer is capped by a 90-second timeout; quota/429 errors from Gemini are surfaced in the UI, not swallowed.
+- Stateless by design: no database, no persistence — every audit is a fresh call with your API key.
+
+---
+
 ## 🚀 Quick Start
 
 ### Option 1: Docker (Recommended)
