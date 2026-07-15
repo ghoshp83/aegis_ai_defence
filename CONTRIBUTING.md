@@ -6,7 +6,7 @@ Thank you for your interest in contributing to AEGIS! 🎉
 
 ### Reporting Bugs
 
-1. Check if the bug has already been reported in [Issues](https://github.com/yourusername/aegis-ai-defence/issues)
+1. Check if the bug has already been reported in [Issues](https://github.com/ghoshp83/aegis_ai_defence/issues)
 2. If not, create a new issue with:
    - Clear title and description
    - Steps to reproduce
@@ -37,8 +37,8 @@ Thank you for your interest in contributing to AEGIS! 🎉
 # 1. Fork the repository on GitHub
 
 # 2. Clone your fork
-git clone https://github.com/YOUR_USERNAME/aegis-ai-defence.git
-cd aegis-ai-defence
+git clone https://github.com/YOUR_USERNAME/aegis_ai_defence.git
+cd aegis_ai_defence
 
 # 3. Install dependencies
 npm install

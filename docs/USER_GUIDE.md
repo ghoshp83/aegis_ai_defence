@@ -158,5 +158,4 @@ Navigate through tabs:
 ## Next Steps
 
 - [CI/CD Integration](CICD.md)
-- [API Reference](API.md)
 - [Contributing](../CONTRIBUTING.md)

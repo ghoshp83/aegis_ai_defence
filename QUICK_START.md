@@ -6,8 +6,8 @@
 # 1. Fork the repository on GitHub (click Fork button)
 
 # 2. Clone your fork
-git clone https://github.com/YOUR_USERNAME/aegis-ai-defence.git
-cd aegis-ai-defence
+git clone https://github.com/YOUR_USERNAME/aegis_ai_defence.git
+cd aegis_ai_defence
 
 # 3. Set API Key
 echo "GEMINI_API_KEY=your_key_here" > .env

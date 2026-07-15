@@ -17,8 +17,8 @@
 # 1. Fork the repository on GitHub (click Fork button)
 
 # 2. Clone your fork
-git clone https://github.com/YOUR_USERNAME/aegis-ai-defence.git
-cd aegis-ai-defence
+git clone https://github.com/YOUR_USERNAME/aegis_ai_defence.git
+cd aegis_ai_defence
 
 # 3. Create .env file
 echo "GEMINI_API_KEY=your_api_key_here" > .env
@@ -128,4 +128,3 @@ docker-compose up -d --build
 
 - [User Guide](USER_GUIDE.md)
 - [CI/CD Integration](CICD.md)
-- [API Reference](API.md)

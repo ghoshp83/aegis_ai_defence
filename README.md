@@ -2,12 +2,12 @@
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Gemini](https://img.shields.io/badge/AI-Gemini%203%20Pro-purple)
+![Gemini](https://img.shields.io/badge/AI-Gemini%202.5%20Pro-purple)
 ![Docker](https://img.shields.io/badge/docker-ready-blue)
 
-> **The world's first comprehensive AI defense platform that proves vulnerabilities with live attacks and fixes them automatically.**
+> **An AI defense platform that doesn't just find vulnerabilities in your model code — it generates the exploit that proves them and the patch that fixes them.**
 
-**AEGIS** (Advanced Electronic Guard & Intelligence System) is powered by Google Gemini 3 Pro to perform deep static and dynamic analysis of neural networks across multiple frameworks (PyTorch, TensorFlow, Keras, Go).
+**AEGIS** (Advanced Electronic Guard & Intelligence System) is powered by Google Gemini 2.5 Pro to perform deep static analysis of neural-network code across multiple frameworks (PyTorch, TensorFlow, Keras, Go).
 
 🎥 **[Watch Demo Video](https://youtu.be/QBqkJdfmxhk)**
 
@@ -29,14 +29,15 @@
 
 > **Honest disclaimer:** the Live Attack Simulator is a **UI prototype**. The "FGSM" animation is a `setInterval` loop adding `Math.random() * 5` noise and ending at a hardcoded 87 % success rate — it is **not** a live gradient-descent attack against a real model. The Gemini-driven Active Defense + Code Diff Viewer above are real; this widget exists to communicate the threat-model visually. Roadmap: wire to a real adversarial library (e.g. CleverHans / Foolbox) running against an uploaded model.
 
-### 🧠 RL Auto-Optimizer
-- AI improving AI through reinforcement learning
+### 🧠 RL Auto-Optimizer *(LLM-simulated)*
+- Iterative code hardening presented as RL episodes
 - Live episode streaming (Episode 1: +10 reward, Episode 2: +15...)
 - Security improvements: 50/100 → 85/100 in 5 iterations
-- Impossible before Gemini 3 Pro
+
+> **Honest disclaimer:** the "RL" here is a **prompt-driven simulation** — Gemini is instructed to propose 3–5 improvement iterations and format them as episodes with rewards. No actual reinforcement-learning training loop runs. The streamed episodes and the final hardened code are real Gemini output; the episode/reward framing is presentational.
 
 ### 🏢 Enterprise Features
-- **Multi-Language CI/CD Agents:** Python, Node.js, Go
+- **Multi-Language CI/CD Agents:** Python available today; Node.js & Go planned
 - **EU AI Act Compliance Certificates:** Downloadable PDF reports
 - **Threat Intelligence Feed:** Real-time security statistics
 - **System Architecture Visualization:** Interactive flowcharts
@@ -57,8 +58,8 @@
 # 1. Fork the repository on GitHub (click Fork button)
 
 # 2. Clone your fork
-git clone https://github.com/YOUR_USERNAME/aegis-ai-defence.git
-cd aegis-ai-defence
+git clone https://github.com/YOUR_USERNAME/aegis_ai_defence.git
+cd aegis_ai_defence
 
 # 3. Set your Gemini API key
 echo "GEMINI_API_KEY=your_api_key_here" > .env
@@ -104,15 +105,16 @@ python cli/python/aegis_audit.py \
 ## 📁 Project Structure
 
 ```
-aegis-ai-defence/
+aegis_ai_defence/
 ├── components/          # React UI components
 │   ├── AnalysisPanel.tsx       # Main dashboard
 │   ├── AttackSimulator.tsx     # Live attack visualization
-│   ├── ActiveDefense.tsx       # Red/Blue team modes
+│   ├── CodePanel.tsx           # Red/Blue team code views
+│   ├── DiffViewer.tsx          # Original vs remediated diff
 │   ├── ComplianceCertificate.tsx
 │   └── ...
 ├── services/
-│   └── geminiService.ts        # Gemini 3 Pro integration
+│   └── geminiService.ts        # Gemini 2.5 Pro integration
 ├── cli/
 │   ├── python/                 # Python CLI auditor
 │   ├── nodejs/                 # Node.js CLI auditor
@@ -201,7 +203,7 @@ aegis-audit:
 ## 🛠️ Technology Stack
 
 - **Frontend:** React 19, TypeScript, Tailwind CSS
-- **AI Engine:** Google Gemini 3 Pro
+- **AI Engine:** Google Gemini 2.5 Pro
 - **Visualization:** Recharts
 - **Video Generation:** Google Veo 3.1
 - **Deployment:** Docker, Vite
@@ -222,20 +224,15 @@ aegis-audit:
 
 ## 🌐 Multi-Language Support
 
-### Python
+### Python (available)
 ```bash
 python cli/python/aegis_audit.py --file model.py --api-key KEY --threshold 80
 ```
 
-### Node.js
-```bash
-node cli/nodejs/aegis-audit.js --file model.js --api-key KEY --threshold 80
-```
+### Node.js & Go (planned)
 
-### Go
-```bash
-go run cli/go/aegis-audit.go --file model.go --api-key KEY --threshold 80
-```
+Not yet implemented — `cli/nodejs/` and `cli/go/` currently contain roadmaps
+only. Use the Python CLI or the web interface today.
 
 ---
 
@@ -243,7 +240,6 @@ go run cli/go/aegis-audit.go --file model.go --api-key KEY --threshold 80
 
 - [Installation Guide](docs/INSTALLATION.md)
 - [User Guide](docs/USER_GUIDE.md)
-- [API Reference](docs/API.md)
 - [CI/CD Integration](docs/CICD.md)
 - [Contributing](CONTRIBUTING.md)
 
@@ -277,7 +273,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Demo Video:** https://youtu.be/QBqkJdfmxhk
 - **Documentation:** [docs/](docs/)
-- **Issues:** [GitHub Issues](https://github.com/yourusername/aegis-ai-defence/issues)
+- **Issues:** [GitHub Issues](https://github.com/ghoshp83/aegis_ai_defence/issues)
 
 ---
 
@@ -290,7 +286,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- **Google DeepMind** for Gemini 3 Pro API
+- **Google DeepMind** for the Gemini API
 - **Google Veo** for video generation capabilities
 - **Open Source Community** for amazing tools and libraries
 
