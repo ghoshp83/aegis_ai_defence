@@ -1,6 +1,6 @@
 # 🛡️ AEGIS - Enterprise AI Defense Protocol
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Gemini](https://img.shields.io/badge/AI-Gemini%202.5%20Pro-purple)
 ![Docker](https://img.shields.io/badge/docker-ready-blue)
