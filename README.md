@@ -37,7 +37,7 @@
 > **Honest disclaimer:** the "RL" here is a **prompt-driven simulation** — Gemini is instructed to propose 3–5 improvement iterations and format them as episodes with rewards. No actual reinforcement-learning training loop runs. The streamed episodes and the final hardened code are real Gemini output; the episode/reward framing is presentational.
 
 ### 🏢 Enterprise Features
-- **Multi-Language CI/CD Agents:** Python available today; Node.js & Go planned
+- **Multi-Language CI/CD Agents:** Python & Node.js available today; Go planned
 - **EU AI Act Compliance Certificates:** Downloadable PDF reports
 - **Threat Intelligence Feed:** Real-time security statistics
 - **System Architecture Visualization:** Interactive flowcharts
@@ -262,15 +262,20 @@ aegis-audit:
 
 ## 🌐 Multi-Language Support
 
-### Python (available)
+### Python
 ```bash
 python cli/python/aegis_audit.py --file model.py --api-key KEY --threshold 80
 ```
 
-### Node.js & Go (planned)
+### Node.js
+```bash
+node cli/nodejs/aegis-audit.js --file model.js --api-key KEY --threshold 80
+```
 
-Not yet implemented — `cli/nodejs/` and `cli/go/` currently contain roadmaps
-only. Use the Python CLI or the web interface today.
+### Go (planned)
+
+Not yet implemented — `cli/go/` currently contains a roadmap only. Use the
+Python or Node.js CLI today.
 
 ---
 
