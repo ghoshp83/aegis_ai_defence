@@ -398,53 +398,7 @@ export const optimizeModelWithRL = async (
                 }
             }
 
-            // Parsing the Structured Text Output
-            const result: RLOptimizationResult = {
-                iterations: [],
-                finalStats: { securityGain: "Unknown", performanceImpact: "Unknown" },
-                optimizedCode: ""
-            };
-
-            // 1. Extract Episodes
-            const episodeRegex = /<EPISODE>([\s\S]*?)<\/EPISODE>/g;
-            let match;
-            while ((match = episodeRegex.exec(fullText)) !== null) {
-                const content = match[1];
-                const episode = parseInt(content.match(/Episode:\s*(\d+)/)?.[1] || "0");
-                const action = content.match(/Action:\s*(.*)/)?.[1]?.trim() || "Unknown Action";
-                const rewardStr = content.match(/Reward:\s*([+\-]?\d+)/)?.[1] || "0";
-                const outcome = content.match(/Outcome:\s*(.*)/)?.[1]?.trim() || "Processed";
-                
-                if (episode > 0) {
-                    result.iterations.push({
-                        episode,
-                        action,
-                        reward: parseInt(rewardStr),
-                        outcome
-                    });
-                }
-            }
-
-            // 2. Extract Code
-            const codeMatch = fullText.match(/<FINAL_CODE>([\s\S]*?)<\/FINAL_CODE>/);
-            if (codeMatch) {
-                let codeClean = codeMatch[1].trim();
-                // Remove markdown code fences if the model added them inside the tag
-                codeClean = codeClean.replace(/^```\w*\n/, '').replace(/\n```$/, '');
-                result.optimizedCode = codeClean;
-            } else {
-                 result.optimizedCode = "// Code generation incomplete or format error.\n// Check logs for partial output.";
-            }
-
-            // 3. Extract Stats
-            const statsMatch = fullText.match(/<STATS>([\s\S]*?)<\/STATS>/);
-            if (statsMatch) {
-                const content = statsMatch[1];
-                result.finalStats.securityGain = content.match(/SecurityGain:\s*(.*)/)?.[1]?.trim() || "Unknown";
-                result.finalStats.performanceImpact = content.match(/PerformanceImpact:\s*(.*)/)?.[1]?.trim() || "Unknown";
-            }
-
-            return result;
+            return parseRLOutput(fullText);
 
         } catch (error: any) {
             console.error("RL Optimization failed:", error);
@@ -463,8 +417,60 @@ export const optimizeModelWithRL = async (
     return Promise.race([runStream(), timeoutPromise]);
 };
 
+// Parses the tagged <EPISODE>/<FINAL_CODE>/<STATS> text the RL optimizer
+// prompt requests. Exported for unit testing.
+export function parseRLOutput(fullText: string): RLOptimizationResult {
+    const result: RLOptimizationResult = {
+        iterations: [],
+        finalStats: { securityGain: "Unknown", performanceImpact: "Unknown" },
+        optimizedCode: ""
+    };
+
+    // 1. Extract Episodes
+    const episodeRegex = /<EPISODE>([\s\S]*?)<\/EPISODE>/g;
+    let match;
+    while ((match = episodeRegex.exec(fullText)) !== null) {
+        const content = match[1];
+        const episode = parseInt(content.match(/Episode:\s*(\d+)/)?.[1] || "0");
+        const action = content.match(/Action:\s*(.*)/)?.[1]?.trim() || "Unknown Action";
+        const rewardStr = content.match(/Reward:\s*([+\-]?\d+)/)?.[1] || "0";
+        const outcome = content.match(/Outcome:\s*(.*)/)?.[1]?.trim() || "Processed";
+
+        if (episode > 0) {
+            result.iterations.push({
+                episode,
+                action,
+                reward: parseInt(rewardStr),
+                outcome
+            });
+        }
+    }
+
+    // 2. Extract Code
+    const codeMatch = fullText.match(/<FINAL_CODE>([\s\S]*?)<\/FINAL_CODE>/);
+    if (codeMatch) {
+        let codeClean = codeMatch[1].trim();
+        // Remove markdown code fences if the model added them inside the tag
+        codeClean = codeClean.replace(/^```\w*\n/, '').replace(/\n```$/, '');
+        result.optimizedCode = codeClean;
+    } else {
+        result.optimizedCode = "// Code generation incomplete or format error.\n// Check logs for partial output.";
+    }
+
+    // 3. Extract Stats
+    const statsMatch = fullText.match(/<STATS>([\s\S]*?)<\/STATS>/);
+    if (statsMatch) {
+        const content = statsMatch[1];
+        result.finalStats.securityGain = content.match(/SecurityGain:\s*(.*)/)?.[1]?.trim() || "Unknown";
+        result.finalStats.performanceImpact = content.match(/PerformanceImpact:\s*(.*)/)?.[1]?.trim() || "Unknown";
+    }
+
+    return result;
+}
+
 // Helper: Context-Aware Robust JSON Parsing with Stack-Based Repair
-function parseJSONRobust(text: string): any {
+// Exported for unit testing.
+export function parseJSONRobust(text: string): any {
     let clean = text.trim();
     // remove markdown wrappers
     clean = clean.replace(/^```(json)?\s*/, "").replace(/\s*```$/, "");
